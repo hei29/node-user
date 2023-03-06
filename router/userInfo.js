@@ -5,7 +5,6 @@ const path = require('path')
 // 导入验证表单中间件
 const expressJoi = require('@escook/express-joi')
 const { check_user_msg, check_update_pwd, check_update_avatar} = require('../check/user')
-const { dirname } = require('path')
 const router = express.Router()
 
 const storage = multer.diskStorage({
@@ -42,6 +41,9 @@ const upload = multer({
 
 // 获取用户信息
 router.get('/info', handle.info)
+
+// 获取所有可管理用户信息
+router.get('/userManage', handle.userManage)
 
 // 更新用户信息
 router.post('/update', expressJoi(check_user_msg), handle.update)

@@ -7,6 +7,7 @@ const username = joi.string().alphanum().min(2).max(11).required()
 const password = joi.string().pattern(/^[\S]{4,15}$/).required()
 const nickname = joi.string().required()
 const email = joi.string().email().required()
+const authority = joi.number()
 const user_pic = joi.string().required()
 const code = joi.number().required()
 
@@ -44,7 +45,7 @@ exports.check_user_msg = {
         id,
         nickname,
         email,
-        // user_pic
+        authority
     }
 }
 

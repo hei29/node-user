@@ -3,7 +3,7 @@ const db = require('../db')
 const bcrypt = require('bcryptjs')
 const path = require('path')
 
-// 获取用户信息
+// 获取当前登录用户信息
 const info = (req, res) => {
     const { id } = req.auth
     const searchStr = 'select * from users where id=?'
@@ -16,6 +16,18 @@ const info = (req, res) => {
             })
         } 
         res.out('用户信息获取失败')
+    })
+}
+
+// 获取所有可管理用户信息
+const userManage = (req,res) => {
+    const {authority} = req.auth
+    db.query('select * from users where authority > ?', authority, (err, results) => {
+        if (err) return res.out(err)
+        res.send({
+            status: 200,
+            data: results
+        })
     })
 }
 
@@ -86,6 +98,7 @@ const updateAvatar = (req,res) => {
 
 module.exports = {
     info,
+    userManage,
     update,
     updatePwd,
     updateAvatar

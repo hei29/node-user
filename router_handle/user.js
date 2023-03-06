@@ -88,7 +88,6 @@ const mail = (req, res) => {
     const registerd = 'select * from users where email is not null and account_create_time is null'
     new Promise((resolve, reject) => {
         db.query(registerd, (err, results) => {
-            console.log(results);
             if(err) return res.out(err)
             if(results.length>0){
                 const {id} = results[0]
@@ -109,6 +108,7 @@ const mail = (req, res) => {
     }).then(() => {
         // 判断邮箱是否已注册
         const code = createSix()
+        console.log(code);
         const {email} = req.body
         const cnkiStr = 'select * from users where email=?'
         db.query(cnkiStr, email, (err, results) => {

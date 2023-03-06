@@ -22,6 +22,7 @@ app.use(cors())
 
 // 托管静态资源
 app.use('/uploads', express.static(path.join(__dirname, './uploads')))
+// app.use('/AzurLanne', express.static('/home/public/AzurLanne'))  // 线上放开
 
 // 配置解析表单数据中间件
 app.use(express.json())
